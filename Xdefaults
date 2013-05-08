@@ -1,0 +1,81 @@
+XPostit*saveNotes: true
+#ifdef COLOR
+XPostit*Text*Background:  White
+XPostit*Text*Foreground:	Black
+XPostit*Plaid*Background:	Orangered
+XPostit*Plaid*Foreground:	Black
+#endif
+
+xcal.ReverseVideo: true
+xcal.Format: %a %d %b. %Y - %I:%M
+XCal*Font: -misc-fixed-medium-r-*-*-13-*-*-*-*-80-*-*
+
+URxvt*saveLines: 6000
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: /usr/bin/chromium-browser
+URxvt.matcher.button: 1
+URxvt.background: black
+URxvt.foreground: white
+URxvt.borderColor: black
+URxvt*scrollstyle: plain
+URxvt*cursorColor: #FF4500
+!URxvt.font: -lfp-bright-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*boldFont: -lfp-bright-*-*-*-*-*-*-*-*-*-*-*-*
+URxvt.font: -lfp-asimov-*-*-*-*-*-*-*-*-*-*-*-*
+URxvt*boldFont: -lfp-asimov-*-*-*-*-*-*-*-*-*-*-*-*
+
+!black: #676767 / #757575
+URxvt*color0: #676767
+URxvt*color8: #757575
+!red: #EA6868 / #FF7272
+URxvt*color1: #EA6868
+URxvt*color9: #FF7272
+!green: #ABCB8D /#AFD78A
+URxvt*color2: #ABCB8D
+URxvt*color10: #AFD78A
+!yellow: #E8AE5B / #FFA75D
+URxvt*color3: #AA5500
+URxvt*color11: #FFFF55
+!blue: #71C5F4 / #67CDE9
+URxvt*color4: #71C5F4
+URxvt*color12: #67CDE9
+!magenta: #E2BAF1 / #ECAEE9
+URxvt*color5: #E2BAF1
+URxvt*color13: #ECAEE9
+!cyan :#21F1EA / #36FFFC
+URxvt*color6: #21F1EA
+URxvt*color14: #36FFFC
+!white: #F1F1F1 / #FFFFFF
+URxvt*color7: #F1F1F1
+URxvt*color15: #FFFFFF
+
+! XTerm*font: -lfp-bright-*-*-*-*-*-*-*-*-*-*-*-*
+! XTerm*boldFont: -lfp-bright-*-*-*-*-*-*-*-*-*-*-*-*
+XTerm*font: -*-terminus-*-*-*-*-*-*-*-*-*-*-*-*
+XTerm*boldFont: -*-terminus-*-*-*-*-*-*-*-*-*-*-*-*
+XTerm*metaSendsEscape: true
+XTerm*eightBitInput: false
+! XTerm*faceName: Droid Sans Mono
+! XTerm*faceSize: 9
+! XTerm*font: xft:Droid Sans Mono:pixelsize=9
+! XTerm*boldFont: xft:Droid Sans Mono:pixelsize=9
+xterm*saveLines: 1500
+xterm*dynamicColors: true
+xterm*toolBar: false
+xterm*faceName: monospace:pixelsize=11
+xterm*boldMode: false
+XTerm*on2Clicks: regex [-_A-Za-z0-9\/\\\.~]+
+XTerm*on3Clicks: regex [^\n]+
+! XTerm*on4clicks: regex [^ \n]
+! Xterm*selectToClipBoard: true
+Xterm*background: '#111'
+Xterm*foreground: '#eee'
+
+XClock*analog: false
+XClock*twentyfour: false
+XClock*update: 60
+XClock*foreground: white
+XClock*background: black
+XClock*font: -lfp-bright-*-*-*-*-*-90-*-*-*-*-*-*
+
+XTerm.allowBoldFonts: false
