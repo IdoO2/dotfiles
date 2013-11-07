@@ -10,12 +10,13 @@ xcal.ReverseVideo: true
 xcal.Format: %a %d %b. %Y - %I:%M
 XCal*Font: -misc-fixed-medium-r-*-*-13-*-*-*-*-80-*-*
 
-URxvt*saveLines: 6000
+!URxvt*saveLines: 6000
+! Use TMUX :
+URxvt*saveLines: 0
+URxvt.termName: rxvt
 URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher: /usr/bin/chromium-browser
 URxvt.matcher.button: 1
-URxvt.background: black
-URxvt.foreground: white
 URxvt.borderColor: black
 URxvt*scrollstyle: plain
 URxvt*cursorColor: #FF4500
@@ -23,10 +24,18 @@ URxvt*cursorColor: #FF4500
 !URxvt*boldFont: -lfp-bright-*-*-*-*-*-*-*-*-*-*-*-*
 URxvt.font: -lfp-asimov-*-*-*-*-*-*-*-*-*-*-*-*
 URxvt*boldFont: -lfp-asimov-*-*-*-*-*-*-*-*-*-*-*-*
+URxvt.cutchars: "\\ `\"\'()*;<>[]{|}&,=?@^\:"
+URxvt.jumpScroll: True
+
+URxvt.depth: 32
+URxvt.background: [90]#000000
+URxvt.foreground: white
+URxvt.iconFile: /home/paterson/.icons/numix/apps/48/terminal.svg
+URxvt.fading: 50
 
 !black: #676767 / #757575
-URxvt*color0: #676767
-URxvt*color8: #757575
+URxvt*color0: #000000
+URxvt*color8: #F7EBD6
 !red: #EA6868 / #FF7272
 URxvt*color1: #EA6868
 URxvt*color9: #FF7272
