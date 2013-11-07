@@ -31,7 +31,7 @@ URxvt.depth: 32
 URxvt.background: [90]#000000
 URxvt.foreground: white
 URxvt.iconFile: /home/paterson/.icons/numix/apps/48/terminal.svg
-URxvt.fading: 50
+URxvt.fading: 25
 
 !black: #676767 / #757575
 URxvt*color0: #000000
