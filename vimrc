@@ -12,19 +12,11 @@ filetype indent on
 "Always show current position
 set ruler
 
-" Height of the command bar
-set cmdheight=1
-
-" Ignore case when searching
+" Search behaviour similar to emacs'
+set wildignorecase
 set ignorecase
-
-" When searching try to be smart about cases 
 set smartcase
-
-" Highlight search results
 set hlsearch
-
-" Makes search act like search in modern browsers
 set incsearch
 
 " Don't redraw while executing macros (good performance config)
@@ -71,6 +63,8 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+" Remember info about open buffers on close
+set viminfo^=%
 
 " Always show the status line
 set laststatus=2
