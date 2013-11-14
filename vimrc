@@ -56,7 +56,7 @@ set tabstop=2
 
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
+set wrap linebreak nolist "" Soft wrap
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
