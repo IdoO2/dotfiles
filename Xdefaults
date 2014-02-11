@@ -1,0 +1,32 @@
+!!
+!! XTERM
+!!
+xterm*on2Clicks: regex [-A-Za-z0-9,./?%&#_]+
+XTerm*eightBitInput: false ! alt=meta in emacs
+XTerm*boldMode: false
+Xterm*font: fixed
+Xterm*boldFont: fixed
+
+!URxvt*saveLines: 6000
+! Use TMUX :
+URxvt*saveLines: 0
+URxvt.termName: rxvt-unicode
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.borderColor: black
+URxvt*scrollstyle: plain
+URxvt*cursorColor: #FF4500
+URxvt.font: -*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*
+URxvt.boldFont: -*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*
+URxvt.cutchars: "\\ `\"\'()*;<>[]{|}&,=?@^\:"
+URxvt.jumpScroll: True
+
+URxvt.depth: 32
+URxvt.background: [90]#000000
+URxvt.foreground: #cccccc
+URxvt.iconFile: /usr/share/icons/elementary/apps/128/utilities-terminal.svg
+URxvt.fading: 25
+
+
+! vim: set ft=xdefaults:
