@@ -1,0 +1,57 @@
+set mbox_type = Maildir
+set folder=$HOME/.mail/ol
+set spoolfile=+/Inbox
+set header_cache=~/.cache/mutt
+
+set record = +Sent
+set ssl_starttls = yes
+set smtp_url = "smtp://me@theirPlace.tld@smtp-mail.outlook.com:587"
+
+set from = 'me@theirPlace.tld'
+set realname = 'dafp'
+
+set send_charset = 'utf-8:iso-8859-1:us-ascii'
+
+#set smtp_pass = 'IfYouDare'
+
+set sidebar_visible = no
+
+set fast_reply
+set forward_format = "Fwd: %s"
+set reply_to
+set reverse_name
+set include
+set forward_quote
+
+set date_format = "%a %d %b"
+set index_format = "%3C  %D  |  %Z   %-40.40n %s"
+
+bind index \Cr imap-fetch-mail
+bind index G last-entry
+
+# In .mutt/mailcap: cf. https://wiki.archlinux.org/index.php/Mutt#Viewing_HTML
+set mailcap_path  = ~/.mutt/mailcap
+auto_view text/html
+alternative_order text/plain text/html
+
+unset mark_old
+set beep_new
+
+color hdrdefault blue black
+color quoted blue black
+color signature blue black
+color attachment red black
+color message brightwhite black
+color error brightred black
+color indicator brightwhite black
+color status black brightblack
+color tree green black
+color normal white black
+color markers red black
+color search white black
+color tilde brightmagenta black
+color index brightgreen black ~F
+color index brightblue black "~N|~O"
+
+alias who Whos Name <who@leeds.uk>
+
