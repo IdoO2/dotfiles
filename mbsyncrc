@@ -1,0 +1,21 @@
+IMAPAccount MSmail
+Host imap-mail.outlook.com
+User Me@theirplace.tld
+Pass IfYouDare
+
+UseIMAPS yes
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore ol-remote
+Account MSmail
+
+MaildirStore ol-local
+Path ~/.mail/ol/
+Inbox ~/.mail/ol/Inbox
+
+Channel MSmail
+Master :ol-remote:
+Slave :ol-local:
+
+Create Both
+SyncState *
