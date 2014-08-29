@@ -86,3 +86,5 @@ if version >= 700
    au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guibg=Magenta
    au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
 endif
+
+set showcmd
