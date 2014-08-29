@@ -3,39 +3,61 @@ set folder=$HOME/.mail/ol
 set spoolfile=+/Inbox
 set header_cache=~/.cache/mutt
 
-set record = +Sent
-set ssl_starttls = yes
-set smtp_url = "smtp://me@theirPlace.tld@smtp-mail.outlook.com:587"
 
-set from = 'me@theirPlace.tld'
-set realname = 'dafp'
+set record = $HOME/.mail/ol-sent
+set ssl_starttls = yes
+set smtp_url = "smtp://me@someplace.tld@smtp-mail.outlook.com:587"
+
+set from = 'me@someplace.tld'
+set realname = 'IdoO2'
 
 set send_charset = 'utf-8:iso-8859-1:us-ascii'
 
-#set smtp_pass = 'IfYouDare'
-
 set sidebar_visible = no
 
-set fast_reply
-set forward_format = "Fwd: %s"
-set reply_to
-set reverse_name
-set include
-set forward_quote
+set fast_reply # skip to compose when replying
+set forward_format = "Fwd: %s" # format of subject when forwarding
+set reply_to # reply to Reply to: field
+set reverse_name # reply as whomever it was to
+set include # include message in replies
+set forward_quote # include message in forwards
 
 set date_format = "%a %d %b"
 set index_format = "%3C  %D  |  %Z   %-40.40n %s"
 
 bind index \Cr imap-fetch-mail
 bind index G last-entry
+bind pager <Down> next-line
+bind pager <Up> previous-line
 
-# In .mutt/mailcap: cf. https://wiki.archlinux.org/index.php/Mutt#Viewing_HTML
+#set sidebar_visible = yes
+#set sidebar_width=35
+#set sidebar_delim='|'
+#set sidebar_sort=yes
+#color sidebar_new brightblue black
+#bind index \Ch sidebar-prev
+#bind index \Cl sidebar-next
+#bind index \Co sidebar-open
+
+macro index <esc>l '\
+<tag-pattern>~N|~O<enter>\
+<tag-prefix-cond>\
+<tag-prefix><clear-flag>N\
+<tag-prefix><clear-flag>O\
+<untag-pattern>~T<enter>' "mark all messages read"
+
+# hopefully prevent broken socket, https://techknowhow.library.emory.edu/blogs/branker/2009/08/05/mutt-and-tlssocketwrite-timeouts-over-imap
+set timeout = 30
+
 set mailcap_path  = ~/.mutt/mailcap
 auto_view text/html
 alternative_order text/plain text/html
 
-unset mark_old
-set beep_new
+unset mark_old # read/new is good enough for me
+set beep_new # bell on new mails
+
+macro attach W <save-entry><kill-line>~/
+macro attach E <save-entry><kill-line>~/<enter>
 
 color hdrdefault blue black
 color quoted blue black
