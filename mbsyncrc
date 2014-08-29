@@ -4,18 +4,24 @@ User Me@theirplace.tld
 Pass IfYouDare
 
 UseIMAPS yes
+# The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.
 CertificateFile /etc/ssl/certs/ca-certificates.crt
+#CertificateFile ~/.cert/imap.gmail.com.pem
+#CertificateFile ~/.cert/Equifax_Secure_CA.pem
 
 IMAPStore ol-remote
 Account MSmail
 
 MaildirStore ol-local
+# The trailing "/" is important
 Path ~/.mail/ol/
 Inbox ~/.mail/ol/Inbox
 
 Channel MSmail
 Master :ol-remote:
 Slave :ol-local:
-
+Patterns Inbox Archive Drafts Sent
+# Automatically create missing mailboxes, both locally and on the server
 Create Both
+# Save the synchronization state files in the relevant directory
 SyncState *
