@@ -1,3 +1,5 @@
+" ln -s <full path to this file> ~/.vimrc
+
 " Don't close window, when deleting a buffer
 " Keep for GUI only
 command! Bclose call <SID>BufcloseCloseIt()
@@ -87,4 +89,6 @@ if version >= 700
    au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
 endif
 
-set showcmd
+" Generally the desired effect
+set bg=dark
+set showcmd " Hints as to what you might be wanting to type
