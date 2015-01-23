@@ -1,19 +1,22 @@
+# Configuration for mutt
+# External data in ~/.mutt/*: private, aliases, mailcap
+# To use: ln -s <this file full path> ~/.muttrc
+
+source ~/.mutt/private
+
 set mbox_type = Maildir
 set folder=$HOME/.mail/ol
 set spoolfile=+/Inbox
 set header_cache=~/.cache/mutt
 
-
 set record = $HOME/.mail/ol-sent
 set ssl_starttls = yes
-set smtp_url = "smtp://me@someplace.tld@smtp-mail.outlook.com:587"
-
-set from = 'me@someplace.tld'
-set realname = 'IdoO2'
 
 set send_charset = 'utf-8:iso-8859-1:us-ascii'
 
 set sidebar_visible = no
+
+set editor = 'vim'
 
 set fast_reply # skip to compose when replying
 set forward_format = "Fwd: %s" # format of subject when forwarding
@@ -27,37 +30,24 @@ set index_format = "%3C  %D  |  %Z   %-40.40n %s"
 
 bind index \Cr imap-fetch-mail
 bind index G last-entry
-bind pager <Down> next-line
-bind pager <Up> previous-line
-
-#set sidebar_visible = yes
-#set sidebar_width=35
-#set sidebar_delim='|'
-#set sidebar_sort=yes
-#color sidebar_new brightblue black
-#bind index \Ch sidebar-prev
-#bind index \Cl sidebar-next
-#bind index \Co sidebar-open
-
-macro index <esc>l '\
-<tag-pattern>~N|~O<enter>\
-<tag-prefix-cond>\
-<tag-prefix><clear-flag>N\
-<tag-prefix><clear-flag>O\
-<untag-pattern>~T<enter>' "mark all messages read"
 
 # hopefully prevent broken socket, https://techknowhow.library.emory.edu/blogs/branker/2009/08/05/mutt-and-tlssocketwrite-timeouts-over-imap
 set timeout = 30
 
 set mailcap_path  = ~/.mutt/mailcap
-auto_view text/html
-alternative_order text/plain text/html
+#auto_view text/html # display HTML version by default; conflicts with alternative_order
+#alternative_order text/html text/plain
+alternative_order text/plain text/html # Use “v” (view attachments) to see email in browser
 
-unset mark_old # read/new is good enough for me
-set beep_new # bell on new mails
+# unset mark_old # read or new only
+set beep_new # bell on new mail
 
+# Faster attachments
 macro attach W <save-entry><kill-line>~/
 macro attach E <save-entry><kill-line>~/<enter>
+
+# On list view, archive highlighted message with A
+macro index A <save-entry><kill-line>+Archive<enter>y<sync-mailbox>y
 
 color hdrdefault blue black
 color quoted blue black
@@ -75,5 +65,27 @@ color tilde brightmagenta black
 color index brightgreen black ~F
 color index brightblue black "~N|~O"
 
-alias who Whos Name <who@leeds.uk>
+# Light scheme
+# color hdrdefault blue white
+# color quoted blue white
+# color signature blue white
+# color attachment red white
+# color message black white
+# color error brightred white
+# color indicator red white
+# color status white cyan
+# color tree green white
+# color normal black white
+# color markers red white
+# color search black white
+# color tilde brightmagenta white
+# color index brightgreen white ~F
+# color index brightblue white "~N|~O"
 
+#color normal white black
+#color index cyan black ~N
+#color indicator black brightwhite
+
+# Aliases
+set alias_file=~/.mutt/aliases # For automatic insertion
+source $alias_file
