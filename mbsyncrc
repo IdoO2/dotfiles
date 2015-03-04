@@ -33,6 +33,6 @@ Slave :ol-local:
 # What to get
 Patterns Inbox Archive Drafts Sent
 # Automatically create missing mailboxes, both locally and on the server
-Create Both
+Create Slave
 # Save the synchronization state files in the relevant directory
 SyncState *
