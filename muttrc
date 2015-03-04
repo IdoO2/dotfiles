@@ -9,6 +9,9 @@ set folder=$HOME/.mail/ol
 set spoolfile=+/Inbox
 set header_cache=~/.cache/mutt
 
+set sendmail = "/usr/bin/msmtp -a MSmail"
+set sendmail_wait = -1
+#unset record
 set record = $HOME/.mail/ol-sent
 set ssl_starttls = yes
 
