@@ -14,7 +14,8 @@ set ssl_starttls = yes
 
 set send_charset = 'utf-8:iso-8859-1:us-ascii'
 
-set sidebar_visible = no
+# Not supported here
+# set sidebar_visible = no
 
 set editor = 'vim'
 
@@ -55,15 +56,18 @@ color signature blue black
 color attachment red black
 color message brightwhite black
 color error brightred black
-color indicator brightwhite black
+color indicator yellow black
 color status black brightblack
 color tree green black
 color normal white black
 color markers red black
 color search white black
 color tilde brightmagenta black
-color index brightgreen black ~F
+
+color index white black ~A
 color index brightblue black "~N|~O"
+#color index brightgreen black ~F
+color index brightyellow black ~F
 
 # Light scheme
 # color hdrdefault blue white
