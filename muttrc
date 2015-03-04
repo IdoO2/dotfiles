@@ -90,6 +90,8 @@ color index brightyellow black ~F
 #color index cyan black ~N
 #color indicator black brightwhite
 
+set sort = threads
+
 # Aliases
 set alias_file=~/.mutt/aliases # For automatic insertion
 source $alias_file
