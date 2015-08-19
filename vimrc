@@ -1,52 +1,62 @@
-" ln -s <full path to this file> ~/.vimrc
+" Indentation
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+set ai "Auto indent; basic
+" set si "Smart indent; see also cindent; incompatible with “filetype plugin
+" indent on”
+filetype plugin indent on
 
-" Don't close window, when deleting a buffer
-" Keep for GUI only
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+set wrap "Wrap lines
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+" set autochdir
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
-
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
-endfunction
-
-" Search behaviour similar to emacs'
-set wildignorecase
+" Search behaviour similar to emacs’
 set ignorecase
+set infercase
+if exists("&wildignorecase")
+   set wildignorecase
+endif
 set smartcase
 set hlsearch
 set incsearch
 
+" Use menu to show command-line completion (in 'full' case)
+set wildmenu
+
+" Set command-line completion mode:
+"   - on first <Tab>, when more than one match, list all matches and complete
+"     the longest common  string
+"   - on second <Tab>, complete the next full match and show menu
+set wildmode=list:longest,full
+
+" Environment
 set lazyredraw
-
 set encoding=utf8
-
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
 
-" Return to last edit position when opening files (You want this!)
+" Enable syntax highlighting
+syntax enable
+
+" SCSS === CSS
+autocmd BufNewFile,BufRead *.scss set ft=scss.css
+autocmd BufNewFile,BufRead *.mu set ft=html.mu
+"autocmd BufNewFile,BufRead *.html.twig set ft=html
+au BufRead,BufNewFile *.twig set syntax=htmldjango
+
+" Return to last edit position when opening files
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
 " Remember info about open buffers on close
 set viminfo^=%
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+" Delete trailing white space on save
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
@@ -55,40 +65,80 @@ endfunc
 autocmd BufWrite * :call DeleteTrailingWS()
 autocmd BufWrite * :call DeleteTrailingWS()
 
-" Enable syntax highlighting
-syntax enable
+augroup CursorLine
+   au!
+   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+   au WinLeave * setlocal nocursorline
+augroup END
+:hi CursorLine   cterm=NONE ctermbg=NONE ctermfg=NONE
+" No cursor line except in insert mode
+:autocmd InsertEnter,InsertLeave * set cul!
+" same as
+":autocmd InsertEnter * set cul
+":autocmd InsertLeave * set nocul
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
+set foldmethod=indent
 
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == 3 spaces
-set shiftwidth=3
-set tabstop=3
-
-" Linebreak on 500 characters
-" set lbr
-" set tw=500
-
-set ai "Auto indent
-set si "Smart indent
-set wrap linebreak nolist " Supposedly better line wrapping
-
-au BufRead /tmp/pico* setlocal tw=72 "Autowrap in Alpine mail editing
-au BufRead /tmp/mutt* setlocal tw=72 "Autowrap in Alpine mail editing
-
-" Status line : always there, different colour for insert modes
 set laststatus=2
+set statusline=%f\ %2*%m\ %1*%h%r%=[%{&encoding}\ %{&fileformat}\ %{strlen(&ft)?&ft:'none'}\ %{getfperm(@%)}]\ 0x%B\ %12.(%c:%l/%L%)
+" set statusline to change colour based on mode
 if version >= 700
-   au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guibg=Magenta
-   au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+    " cterm is used for st, rxvt
+    au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guibg=Magenta
+    au InsertLeave * hi StatusLine term=reverse ctermbg=2 gui=bold,reverse
 endif
 
-" Generally the desired effect
-set bg=dark
-set showcmd " Hints as to what you might be wanting to type
+set nohlsearch
+
+map ; :
+
+nnoremap / /\v
+vnoremap / /\v
+
+nmap ,, :buffers<cr>
+
+set pastetoggle=<F9>
+
+set showcmd
+
+let mapleader = " " " Leader is the space key
+let g:mapleader = " "
+nmap <leader>w :w<cr>
+nmap <leader>x :x<cr>
+
+nmap <c-l> :bn<cr>
+nmap <c-h> :bp<cr>
+
+imap <c-o> <Esc>:w<cr>
+imap <c-s-o> <Esc>:x<cr>
+
+imap jj <ESC>
+
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    elseif(&number == 1)
+        set nonumber
+    else
+        set relativenumber
+        set number
+    endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<cr>
+
+nmap <C-f> :buf
+
+" Works if vim was compiled with +xterm_clipboard (run vim --version to know)
+" Here requires install of vim-gnome or the like, which are much slower
+" Update: possibly due to incorrectly set env vars (DISPLAY for instance)
+" Aliasing vim to vim -X solves problem
+" Update: appears that this is normal behaviour, but the -X option makes
+" clipboard unavailable
+" nmap <C-p> "+p
+
+nmap <C-j> :normal o<Enter>
+nmap <C-k> :normal O<Enter>
+
+set pastetoggle=<C-p>
+
+hi MatchParen ctermfg=white ctermbg=NONE cterm=bold
