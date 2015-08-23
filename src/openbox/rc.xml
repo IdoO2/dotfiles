@@ -395,7 +395,7 @@ and back in -->
         <!-- <startupnotify> -->
         <!-- <enabled>true</enabled> -->
         <!-- <name>Thunar</name> -->
-        <!-- <command>/home/dafp/.config/openbox/Misc/one_tfm.sh</command> -->
+        <!-- <command>~/.config/openbox/Misc/one_tfm.sh</command> -->
         <command>thunar</command>
         <!-- </startupnotify> -->
         <!-- <command>thunar</command> -->

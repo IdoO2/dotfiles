@@ -1,0 +1,76 @@
+!!
+!! XTERM
+!!
+xterm*on2Clicks: regex [-A-Za-z0-9,./?%&#_]+
+XTerm*eightBitInput: false ! alt=meta in emacs
+XTerm*boldMode: false
+Xterm*font: fixed
+Xterm*boldFont: fixed
+XTerm*font: -*-terminus-*-*-*-*-*-*-*-*-*-*-*-*
+XTerm*boldFont: -*-terminus-*-*-*-*-*-*-*-*-*-*-*-*
+XTerm*metaSendsEscape: true
+XTerm*eightBitInput: false
+! XTerm*faceName: Droid Sans Mono
+! XTerm*faceSize: 9
+! XTerm*font: xft:Droid Sans Mono:pixelsize=9
+! XTerm*boldFont: xft:Droid Sans Mono:pixelsize=9
+xterm*saveLines: 1500
+xterm*dynamicColors: true
+xterm*toolBar: false
+xterm*faceName: monospace:pixelsize=11
+xterm*boldMode: false
+XTerm*on2Clicks: regex [-_A-Za-z0-9\/\\\.~]+
+XTerm*on3Clicks: regex [^\n]+
+! XTerm*on4clicks: regex [^ \n]
+! Xterm*selectToClipBoard: true
+Xterm*background: '#111'
+Xterm*foreground: '#eee'
+
+!URxvt*saveLines: 6000
+! Use TMUX :
+URxvt*saveLines: 0
+URxvt.termName: rxvt-unicode
+URxvt.perl-ext-common: default,matcher
+URxvt.perl-ext: default,matcher
+URxvt.urlLauncher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.borderColor: black
+URxvt*scrollstyle: plain
+URxvt*cursorColor: #FF4500
+URxvt.font: -*-dina-medium-r-*-*-*-100-*-*-*-*-*-*
+URxvt.boldFont: -*-dina-medium-r-*-*-*-100-*-*-*-*-*-*
+URxvt.cutchars: "\\ `\"\'()*;<>[]{|}&,=?@^\:"
+URxvt.jumpScroll: True
+
+URxvt.depth: 32
+URxvt.background: [90]#000000
+URxvt.foreground: #cccccc
+URxvt.iconFile: /usr/share/icons/elementary/apps/128/utilities-terminal.svg
+URxvt.fading: 25
+
+URvxt.geometry: 100x28
+
+lal*font: -*-dina-medium-r-*-*-*-100-*-*-*-*-*-*
+lal*width: 110
+lal*format: %a %e - %l:%M
+
+XPostit*saveNotes: true
+#ifdef COLOR
+XPostit*Text*Background: White
+XPostit*Text*Foreground: Black
+XPostit*Plaid*Background: Orangered
+XPostit*Plaid*Foreground: Black
+#endif
+
+XClock*analog: false
+XClock*twentyfour: false
+XClock*update: 60
+XClock*foreground: white
+XClock*background: black
+XClock*font: -lfp-bright-*-*-*-*-*-90-*-*-*-*-*-*
+
+xcal.ReverseVideo: true
+xcal.Format: %a %d %b. %Y - %I:%M
+XCal*Font: -misc-fixed-medium-r-*-*-13-*-*-*-*-80-*-*
+
+! vim: set ft=xdefaults:
