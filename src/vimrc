@@ -115,13 +115,13 @@ imap <c-s-o> <Esc>:x<cr>
 imap jj <ESC>
 
 function! NumberToggle()
-    if(&relativenumber == 1)
-        set norelativenumber
-    elseif(&number == 1)
-        set nonumber
-    else
-        set relativenumber
+    if(&number == 0)
         set number
+    elseif(&relativenumber == 0)
+        set relativenumber
+    else
+        set nonumber
+        set norelativenumber
     endif
 endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
@@ -142,3 +142,5 @@ nmap <C-k> :normal O<Enter>
 set pastetoggle=<C-p>
 
 hi MatchParen ctermfg=white ctermbg=NONE cterm=bold
+hi LineNr ctermfg=grey
+hi Visual ctermbg=238 cterm=bold
