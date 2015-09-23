@@ -1,0 +1,21 @@
+[user]
+    name = Benjamin Nevis
+    email = example@domain.tld
+[color]
+    ui = true
+[core]
+    editor = vim
+    pager = less
+[push]
+    default = tracking
+[alias]
+    st = status -su
+    ci = commit
+    co = checkout
+    do = diff --name-status origin/master
+    dm = diff master
+    li = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not master; }; f"
+    history = log --graph --pretty=format:'%Cred%h%Creset %d -%Cblue %s%Creset %Cgreen(%ad) %Cblue<%an>%Creset' --abbrev-commit --date=default
+    lg = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    up = "! git remote update --prune && git pull --rebase"
+    dl = "!dl() { git branch -D $1; git push origin :$1; }; dl $1"
