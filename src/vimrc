@@ -143,4 +143,7 @@ set pastetoggle=<C-p>
 
 hi MatchParen ctermfg=white ctermbg=NONE cterm=bold
 hi LineNr ctermfg=grey
-hi Visual ctermbg=238 cterm=bold
+hi Visual ctermbg=238
+
+" Do not freeze on long lines
+set synmaxcol=120
