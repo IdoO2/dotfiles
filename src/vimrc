@@ -146,7 +146,7 @@ hi LineNr ctermfg=grey
 hi Visual ctermbg=238
 
 " Do not freeze on long lines
-set synmaxcol=120
+set synmaxcol=240
 
 " Show some invisble characters
 set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:&,conceal:æ " Note: eol:$ removed (too annoying)
