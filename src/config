@@ -1,0 +1,12 @@
+# Configuration for moc
+# Should be saved as ~/.moc/config
+# And rights set to read only for all except owner
+ReadTags = yes
+MusicDir = "~/Music"
+ShowHiddenFiles = no
+StartInMusicDir = yes
+HideFileExtension = no
+ShowFormat = no
+ShowTime = no
+Theme = transparent-background
+XTermTheme = transparent-background
