@@ -1,6 +1,9 @@
 [user]
     name = Benjamin Nevis
     email = example@domain.tld
+    signingkey = <pubkey>
+[commit]
+    gpgsign = true
 [color]
     ui = true
 [core]
@@ -10,7 +13,7 @@
     default = tracking
 [alias]
     st = status -su
-    ci = commit
+    ci = commit -S
     co = checkout
     do = diff --name-status origin/master
     dm = diff master
