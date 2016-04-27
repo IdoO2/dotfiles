@@ -44,6 +44,7 @@ syntax enable
 " SCSS === CSS
 autocmd BufNewFile,BufRead *.scss set ft=scss.css
 autocmd BufNewFile,BufRead *.mu set ft=html.mu
+autocmd BufNewFile,BufRead *.mustache set ft=html.mu
 "autocmd BufNewFile,BufRead *.html.twig set ft=html
 au BufRead,BufNewFile *.twig set syntax=htmldjango
 
