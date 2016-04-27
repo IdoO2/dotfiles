@@ -2,7 +2,7 @@
 # External data in ~/.mutt/*: private, aliases, mailcap
 # To use: ln -s <this file full path> ~/.muttrc
 
-source ~/.mutt/private
+#source ~/.mutt/private
 
 set mbox_type = Maildir
 set folder=$HOME/.mail/ol
@@ -50,16 +50,19 @@ set beep_new # bell on new mail
 macro attach W <save-entry><kill-line>~/
 macro attach E <save-entry><kill-line>~/<enter>
 
-# On list view, archive highlighted message with A
-macro index A <save-entry><kill-line>+Archive<enter>y<sync-mailbox>y
+# On list view hit “A” to archive all tagged or highlighted message if none
+macro index A ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n"
 
+set arrow_cursor
+
+# Colours
+color indicator white black
 color hdrdefault blue black
 color quoted blue black
 color signature blue black
 color attachment red black
 color message brightwhite black
 color error brightred black
-color indicator yellow black
 color status black brightblack
 color tree green black
 color normal white black
@@ -68,9 +71,16 @@ color search white black
 color tilde brightmagenta black
 
 color index white black ~A
-color index brightblue black "~N|~O"
-#color index brightgreen black ~F
+color index green black "~f personal"
+
+color index brightblue black "~O"
+color index brightgreen black ~N
+color index brightblack black ~R
+color index blue black "~R ~f personal"
+
 color index brightyellow black ~F
+color index red black "~D"
+color index black white ~T
 
 # Light scheme
 # color hdrdefault blue white
