@@ -1,3 +1,9 @@
+call plug#begin()
+Plug 'tpope/vim-sensible'
+" On-demand loading
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+call plug#end()
+
 " Indentation
 set expandtab
 set smarttab
@@ -47,6 +53,7 @@ autocmd BufNewFile,BufRead *.mu set ft=html.mu
 autocmd BufNewFile,BufRead *.mustache set ft=html.mu
 "autocmd BufNewFile,BufRead *.html.twig set ft=html
 au BufRead,BufNewFile *.twig set syntax=htmldjango
+au BufRead,BufNewFile *.txt,*.tex,*.nd set wrap linebreak nolist textwidth=0 wrapmargin=0
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -146,11 +153,23 @@ hi MatchParen ctermfg=white ctermbg=NONE cterm=bold
 hi LineNr ctermfg=grey
 hi Visual ctermbg=238
 
-" Do not freeze on long lines
-set synmaxcol=240
+" Do not freeze on long lines (syntax colouring)
+set synmaxcol=300
 
 " Show some invisble characters
 set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:&,conceal:æ " Note: eol:$ removed (too annoying)
 " set list
 hi NonText ctermfg=cyan ctermbg=NONE cterm=bold
 hi SpecialKey ctermfg=cyan ctermbg=NONE cterm=bold
+
+nmap :w<cr> :up<cr>
+
+nmap ´ :b#<cr> " When C-6 doesn’t work
+
+nmap <leader>D "_D " Delete line without yanking; otherwise use "<num>p, <num=0> being the latest actually yanked item in register; see <leader>p
+nmap <leader>p "0p
+
+nmap :wbd<cr> :w<cr> <bar> :bd<cr>
+
+noremap :2t<cr> :set shiftwidth=2 softtabstop=2<cr>
+noremap :4t<cr> :set shiftwidth=4 softtabstop=4<cr>

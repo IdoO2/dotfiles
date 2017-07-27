@@ -15,7 +15,7 @@
 			 under the mouse pointer. when followMouse is enabled -->
     <underMouse>no</underMouse>
     <!-- move focus under the mouse, even when the mouse is not moving -->
-    <focusDelay>300</focusDelay>
+    <focusDelay>150</focusDelay>
     <!-- when followMouse is enabled, the mouse must be inside the window for
 			 this many milliseconds (1000 = 1 sec) before moving focus to it -->
     <raiseOnFocus>no</raiseOnFocus>
@@ -35,7 +35,7 @@
     <primaryMonitor>1</primaryMonitor>
   </placement>
   <theme>
-    <name>Ecru3</name>
+    <name>Nightmare-02</name>
     <!-- <name>Adwaita</name> -->
     <!-- <name>DarknessReturns-Clearlooks</name> -->
     <titleLayout>CLMS</titleLayout>
@@ -125,7 +125,7 @@ these are default values to use when other ones are not already set
 by other applications, or saved in your session
 use obconf if you want to change these without having to log out
 and back in -->
-    <number>4</number>
+    <number>7</number>
     <firstdesk>1</firstdesk>
     <names>
       <name>Focus</name>
@@ -134,6 +134,7 @@ and back in -->
       <name>Al coda</name>
       <name>Desk Five</name>
       <name>Desk Six</name>
+      <name>Desk Seven</name>
     </names>
     <popupTime>500</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
@@ -160,10 +161,10 @@ and back in -->
 		 Many programs reserve space automatically, but you can use this in other
 		 cases. -->
   <margins>
-    <top>0</top>
-    <bottom>18</bottom>
-    <left>0</left>
-    <right>0</right>
+    <top>2</top>
+    <bottom>2</bottom>
+    <left>2</left>
+    <right>2</right>
   </margins>
   <dock>
     <position>TopRight</position>
@@ -276,6 +277,11 @@ and back in -->
         <desktop>6</desktop>
       </action>
     </keybind>
+    <keybind key="W-7">
+      <action name="Desktop">
+        <desktop>7</desktop>
+      </action>
+    </keybind>
     <keybind key="C-A-Tab">
       <action name="DesktopLast"/>
     </keybind>
@@ -321,6 +327,13 @@ and back in -->
         <follow>no</follow>
       </action>
     </keybind>
+    <keybind key="W-S-7">
+      <action name="SendToDesktop">
+        <desktop>7</desktop>
+        <dialog>no</dialog>
+        <follow>no</follow>
+      </action>
+    </keybind>
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
@@ -346,6 +359,11 @@ and back in -->
     </keybind>
     <keybind key="W-z">
       <action name="ToggleDockAutohide"/>
+    </keybind>
+    <keybind key="W-u">
+      <action name="Execute">
+        <execute>slock</execute>
+      </action>
     </keybind>
     <keybind key="Print">
       <action name="Execute">
@@ -463,7 +481,7 @@ and back in -->
     </keybind>
     <keybind key="W-S-Return">
       <action name="Execute">
-        <command>urxvtc -e tmux -2u attach</command>
+        <command>st -e tmux -2u attach</command>
       </action>
     </keybind>
     <keybind key="W-Return">
@@ -471,7 +489,7 @@ and back in -->
         <startupnotify>
           <enabled>true</enabled>
         </startupnotify>
-        <command>urxvtc -e tmux</command>
+        <command>st -e tmux</command>
       </action>
     </keybind>
     <!-- room for playing -->

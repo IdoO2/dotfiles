@@ -1,7 +1,7 @@
 [user]
     name = Benjamin Nevis
     email = example@domain.tld
-    signingkey = <pubkey>
+    signingkey = E1221D14
 [commit]
     gpgsign = true
 [color]
@@ -9,8 +9,10 @@
 [core]
     editor = vim
     pager = less
+	excludesfile = /home/paterson/.gitignore
 [push]
     default = tracking
+	followTags = true
 [alias]
     st = status -su
     ci = commit -S
@@ -18,7 +20,13 @@
     do = diff --name-status origin/master
     dm = diff master
     li = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not master; }; f"
-    history = log --graph --pretty=format:'%Cred%h%Creset %d -%Cblue %s%Creset %Cgreen(%ad) %Cblue<%an>%Creset' --abbrev-commit --date=default
+    lig = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not master --oneline --decorate; }; f"
+    #history = log --graph --pretty=format:'%Cred%h%Creset %d -%Cblue %s%Creset %Cgreen(%ad) %Cblue<%an>%Creset' --abbrev-commit --date=default
+    history = log --graph --decorate --oneline
     lg = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-    up = "! git remote update --prune && git pull --rebase"
+    up = "! git remote update --prune && git pull --rebase && git bd"
     dl = "!dl() { git branch -D $1; git push origin :$1; }; dl $1"
+    dlt = "!dlt() { git tag -d $1; git push origin :refs/tags/$1; }; dlt $1"
+    slaughter = "! ~/Library/git-gc-all-ferocious"
+    count = "! f(){ egrep -or $1 $2 | sort | uniq -c | sort -nr | less; }; f $1 $(pwd)/$2"
+    bd = "! f(){ for b in $(git branch --merged | egrep -v 'master' | egrep '^ '); do git branch -d $b; done; }; f"

@@ -1,3 +1,6 @@
 #!/bin/sh
 
+sh ~/Library/us-intl.sh
+xsetroot -solid '#333'
+
 exec dwm
