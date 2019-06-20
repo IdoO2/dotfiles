@@ -1,14 +1,23 @@
-call plug#begin()
-Plug 'tpope/vim-sensible'
+call plug#begin('~/.vim/plugged')
+"Plug 'tpope/vim-sensible'
 " On-demand loading
 " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'airblade/vim-gitgutter'
 call plug#end()
+
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
+set updatetime=1000
 
 " Indentation
 set expandtab
 set smarttab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 set ai "Auto indent; basic
 " set si "Smart indent; see also cindent; incompatible with “filetype plugin
 " indent on”
@@ -54,6 +63,7 @@ autocmd BufNewFile,BufRead *.mustache set ft=html.mu
 "autocmd BufNewFile,BufRead *.html.twig set ft=html
 au BufRead,BufNewFile *.twig set syntax=htmldjango
 au BufRead,BufNewFile *.txt,*.tex,*.nd set wrap linebreak nolist textwidth=0 wrapmargin=0
+au BufNewFile,BufRead *.ts,*.tsx set ft=javascript
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -61,8 +71,8 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
-" Remember info about open buffers on close
-set viminfo^=%
+set viminfo^=% " Remember info about open buffers on close
+set hidden " Allow switching buffers even if unsaved
 
 " Delete trailing white space on save
 func! DeleteTrailingWS()
@@ -103,7 +113,8 @@ map ; :
 nnoremap / /\v
 vnoremap / /\v
 
-nmap ,, :buffers<cr>
+" nmap ,, :buffers<cr>
+nnoremap ,, :ls<CR>:buffer<Space>
 
 set pastetoggle=<F9>
 
@@ -133,6 +144,7 @@ function! NumberToggle()
     endif
 endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
+autocmd BufNewFile,BufRead * set number
 
 nmap <C-f> :buf
 
@@ -149,12 +161,12 @@ nmap <C-k> :normal O<Enter>
 
 set pastetoggle=<C-p>
 
-hi MatchParen ctermfg=white ctermbg=NONE cterm=bold
+hi MatchParen ctermfg=red ctermbg=NONE cterm=bold
 hi LineNr ctermfg=grey
 hi Visual ctermbg=238
 
 " Do not freeze on long lines (syntax colouring)
-set synmaxcol=300
+set synmaxcol=400
 
 " Show some invisble characters
 set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:&,conceal:æ " Note: eol:$ removed (too annoying)
@@ -171,5 +183,23 @@ nmap <leader>p "0p
 
 nmap :wbd<cr> :w<cr> <bar> :bd<cr>
 
-noremap :2t<cr> :set shiftwidth=2 softtabstop=2<cr>
-noremap :4t<cr> :set shiftwidth=4 softtabstop=4<cr>
+noremap :2t<cr> :set shiftwidth=2 softtabstop=2 tabstop=2<cr>
+noremap :4t<cr> :set shiftwidth=4 softtabstop=4 tabstop=4<cr>
+
+" Not all satisfied with this
+" Search in all buffers
+" Usage: :Bufgrep/foo/
+function! BuffersList()
+  let all = range(0, bufnr('$'))
+  let res = []
+  for b in all
+    if buflisted(b)
+      call add(res, bufname(b))
+    endif
+  endfor
+  return res
+endfunction
+function! GrepBuffers (expression)
+  exec 'vimgrep/'.a:expression.'/ '.join(BuffersList())
+endfunction
+command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)

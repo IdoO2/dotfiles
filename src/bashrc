@@ -90,7 +90,7 @@ PROMPT_DIRTRIM=2
 # shopt -s autocd
 
 # Correct spelling errors during tab-completion
-shopt -s dirspell
+#shopt -s dirspell
 
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell
@@ -151,10 +151,63 @@ export WORKON_HOME=~/Envs
 
 PATH=$PATH:$HOME/bin
 
-export NVM_DIR="/home/paterson/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#export NVM_DIR="/Users/dpaterson/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # NEWLMFR
-source ~/.autoenv/activate.sh
+#source ~/.autoenv/activate.sh
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+load-nvmrc() {
+if [ -f "$NVM_DIR/nvm.sh" ]; then
+	CURR_PATH=$PWD
+	while [[ $CURR_PATH != / ]]; do
+		if [[ -f "$CURR_PATH/.nvmrc" && -r "$CURR_PATH/.nvmrc" ]]; then
+			NVRMC_VERSION=$(cat "$CURR_PATH/.nvmrc")
+			if [[ "$NVM_VERSION" == "N/A" ]]; then
+				nvm install "$NVRMC_VERSION"
+			fi
+			NVM_VERSION=$(nvm version "$NVRMC_VERSION")
+			if [[ $(nvm version) != "$NVM_VERSION"  ]]; then
+				nvm use "$NVM_VERSION"
+			fi
+			return
+		else
+			CURR_PATH="$(readlink -f "$CURR_PATH"/..)"
+		fi
+	done
+	if [[ $(nvm version) != $(nvm version default)  ]]; then
+		echo "Reverting to nvm default version"
+		nvm use default
+	fi
+fi
+}
+
+cd () {
+    builtin cd "$@" && load-nvmrc
+}
+
+j () {
+  case $1 in
+    ["e"])
+      cd ~/Projects/hubside/editor/
+      ;;
+    ["p"])
+      cd ~/Projects/hubside/plugins/
+      ;;
+    ["r"])
+      cd ~/Projects/hubside/renderer/
+      ;;
+    ["m"])
+      cd ~/Projects/hubside/mono/
+      ;;
+  esac
+}
+
+vimall () {
+  vim $(find "$1" -name "*.js" | tr '\n' ' ')
+}
+
+source /usr/local/Cellar/git/2.15.0/etc/bash_completion.d/git-prompt.sh

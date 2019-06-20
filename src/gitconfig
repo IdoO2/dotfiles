@@ -1,9 +1,9 @@
 [user]
-    name = Benjamin Nevis
-    email = example@domain.tld
-    signingkey = E1221D14
+    name = Daniel Paterson
+    email = dpaterson@actualys.com
+    #signingkey = E1221D14
 [commit]
-    gpgsign = true
+    #gpgsign = true
 [color]
     ui = true
 [core]
@@ -14,19 +14,36 @@
     default = tracking
 	followTags = true
 [alias]
+    # note:
+    # git commit --amend --reuse-message=HEAD --author="Daniel Paterson <dpaterson@actualys.com>"
     st = status -su
-    ci = commit -S
+    #ci = commit -S
+    ci = commit
     co = checkout
-    do = diff --name-status origin/master
-    dm = diff master
-    li = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not master; }; f"
-    lig = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not master --oneline --decorate; }; f"
-    #history = log --graph --pretty=format:'%Cred%h%Creset %d -%Cblue %s%Creset %Cgreen(%ad) %Cblue<%an>%Creset' --abbrev-commit --date=default
-    history = log --graph --decorate --oneline
+    #do = diff --name-status origin/master
+    do = diff --name-status origin/dev
+    #dm = diff master
+    dm = diff dev
+    #li = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not master; }; f"
+    #lig = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not master --oneline --decorate; }; f"
+    li = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not dev; }; f"
+    lig = "! f(){ git log $(git rev-parse --abbrev-ref HEAD) --not dev --oneline --decorate; }; f"
+    #history = log --graph --pretty=format:'%Cred%h%Creset %d -%Cblue %s%Creset %Cgreen(%ad) %Cblue<%an>%Creset' --abbrev-commit --date=relative
+    history = log --graph --pretty=format:'%Cred%h%Creset %d -%Cgreen <%an>%Creset \t%Cblue%s (%ad) %Creset' --abbrev-commit --date=relative
+    #history = log --graph --decorate --oneline
     lg = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     up = "! git remote update --prune && git pull --rebase && git bd"
     dl = "!dl() { git branch -D $1; git push origin :$1; }; dl $1"
     dlt = "!dlt() { git tag -d $1; git push origin :refs/tags/$1; }; dlt $1"
-    slaughter = "! ~/Library/git-gc-all-ferocious"
+    slaughter = "! ~/Library/git-gc-all-ferocious" # http://sam.aiki.info/b/git-gc-all-ferocious
     count = "! f(){ egrep -or $1 $2 | sort | uniq -c | sort -nr | less; }; f $1 $(pwd)/$2"
-    bd = "! f(){ for b in $(git branch --merged | egrep -v 'master' | egrep '^ '); do git branch -d $b; done; }; f"
+    bd = "! f(){ for b in $(git branch --merged | egrep -v 'master|develop|hpc' | egrep '^ '); do git branch -d $b; done; }; f"
+    datetag = !git tag `date \"+%Y%m%d%H%M\"`
+    grpe = grep
+[rerere]
+	enabled = true
+[merge "npm-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P
+[pull]
+	rebase = true
