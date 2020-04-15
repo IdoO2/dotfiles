@@ -3,7 +3,31 @@ call plug#begin('~/.vim/plugged')
 " On-demand loading
 " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'airblade/vim-gitgutter'
+" Plug 'sbdchd/neoformat'
+Plug 'dense-analysis/ale'
 call plug#end()
+
+autocmd BufNewFile,BufRead *.scss set ft=scss.css
+autocmd BufNewFile,BufRead *.mu set ft=html.mu
+autocmd BufNewFile,BufRead *.mustache set ft=html.mu
+"autocmd BufNewFile,BufRead *.html.twig set ft=html
+au BufRead,BufNewFile *.twig set syntax=htmldjango
+au BufNewFile,BufRead *.ts,*.tsx set ft=javascript.tsx
+
+let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_linter_aliases = {'tsx': ['javascript']}
+let g:ale_linters = {'tsx': ['prettier', 'eslint']}
+" Disable error indicators:
+" let g:ale_set_highlights = 0
+" Disable error indicator background:
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+" Disable highlighting faulty code
+let g:ale_set_highlights = 0 " default: 1
+" When to check
+" let g:ale_lint_on_save 1 " default: 1
+" let g:ale_lint_on_text_changed = 'never' " default: 1
+" let g:ale_lint_on_insert_leave = 0 " default: 1
 
 if exists('&signcolumn')  " Vim 7.4.2201
   set signcolumn=yes
@@ -56,14 +80,7 @@ set noswapfile
 " Enable syntax highlighting
 syntax enable
 
-" SCSS === CSS
-autocmd BufNewFile,BufRead *.scss set ft=scss.css
-autocmd BufNewFile,BufRead *.mu set ft=html.mu
-autocmd BufNewFile,BufRead *.mustache set ft=html.mu
-"autocmd BufNewFile,BufRead *.html.twig set ft=html
-au BufRead,BufNewFile *.twig set syntax=htmldjango
 au BufRead,BufNewFile *.txt,*.tex,*.nd set wrap linebreak nolist textwidth=0 wrapmargin=0
-au BufNewFile,BufRead *.ts,*.tsx set ft=javascript
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -74,13 +91,16 @@ autocmd BufReadPost *
 set viminfo^=% " Remember info about open buffers on close
 set hidden " Allow switching buffers even if unsaved
 
-" Delete trailing white space on save
+" Delete trailing white space (on save)
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-autocmd BufWrite * :call DeleteTrailingWS()
+
+" Save events, etc
+" autocmd TextChanged,InsertLeave *.js,*.ts,*.tsx ALEFix
+" autocmd BufWrite *.js,*.ts,*.tsx ALEFix
 autocmd BufWrite * :call DeleteTrailingWS()
 
 augroup CursorLine

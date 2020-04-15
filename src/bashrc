@@ -211,3 +211,5 @@ vimall () {
 }
 
 source /usr/local/Cellar/git/2.15.0/etc/bash_completion.d/git-prompt.sh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
